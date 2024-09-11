@@ -9,22 +9,23 @@ import { ShortSurveyComponent } from '../short-survey/short-survey.component';
 import { InfoComponent } from '../info/info.component';
 import { LongSurveyComponent } from '../long-survey/long-survey.component';
 import { CompleteComponent } from '../complete/complete.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'app-survey-container',
-  imports: [ConsentComponent, RiskSurveyComponent, ShortSurveyComponent, InfoComponent, LongSurveyComponent, CompleteComponent],
+  imports: [CommonModule, ConsentComponent, RiskSurveyComponent, ShortSurveyComponent, InfoComponent, LongSurveyComponent, CompleteComponent],
   template: `
   <div class="grid grid-cols-8 px-6 py-4">
     <div class="col-span-1">
-      <img width="100%" height="100%" src="/assets/uofrlogo.jpeg" alt="University of Regina Logo" />
+      <img width="100%" height="100%" src="/uofrlogo.jpeg" alt="University of Regina Logo" />
     </div>
     <div class="col-span-7 flex items-center">
       <div>
         <h1 class="text-xl font-medium">Environmental, Social, and Governance Conscious Portfolio Survey</h1>
         <div class="text-xs text-gray-600 mb-4">
           <p>Please note that you can close your browser at any time to withdraw consent. No information will be collected until the final submission.</p>
-          <p>Please note that by submitting the survey you will be providing implied consent. Please review the <a class="underline text-blue-600" href="/assets/ESG-Conscious-Portfolio-Survey-Consent-Form.pdf" target="_blank">consent form</a> prior to submission.</p>
+          <p>Please note that by submitting the survey you will be providing implied consent. Please review the <a class="underline text-blue-600" href="/ESG-Conscious-Portfolio-Survey-Consent-Form.pdf" target="_blank">consent form</a> prior to submission.</p>
         </div>
       </div>
     </div>
