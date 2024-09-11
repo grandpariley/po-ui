@@ -16,6 +16,10 @@ import { CommonModule } from '@angular/common';
   selector: 'app-survey-container',
   imports: [CommonModule, ConsentComponent, RiskSurveyComponent, ShortSurveyComponent, InfoComponent, LongSurveyComponent, CompleteComponent],
   template: `
+  <div>
+    <h1>THIS IS A PLAYGROUND</h1>
+    <button (click)="test()">CLICK ME</button>
+  </div>
   <div class="grid grid-cols-8 px-6 py-4">
     <div class="col-span-1">
       <img width="100%" height="100%" src="/uofrlogo.jpeg" alt="University of Regina Logo" />
@@ -47,10 +51,21 @@ export class SurveyContainerComponent implements OnInit {
   ngOnInit(): void {
     this.state.valueChanges.subscribe(s => {
       if (s === 'SUBMIT') {
-        this.surveyService.complete();
-        this.router.navigate(['thanks']);
+        this.surveyService.complete()
+          .subscribe({
+            next: (portfolioId) => this.router.navigate(['portfolio', portfolioId]),
+            error: (err) => this.router.navigate(['error'], { state: err }),
+          });
       }
     });
+  }
+
+  test(): void {
+    this.surveyService.complete()
+      .subscribe({
+        next: (portfolioId) => this.router.navigate(['portfolio', portfolioId]),
+        error: (err) => this.router.navigate(['error'], { state: err }),
+      });
   }
 
   onInfoBack($event: ShortSurveySubmission) {

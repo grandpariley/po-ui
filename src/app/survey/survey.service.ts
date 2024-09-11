@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LongSurveySubmission, RiskSurveySubmission, ShortSurveySubmission, SurveyState, SurveySubmission } from './model/model';
+import { Observable, of } from 'rxjs';
+import { Portfolio } from '../portfolio/model/portfolio.model';
 
 const URI = 'https://faas-tor1-70ca848e.doserverless.co/api/v1/web/fn-e3f092c8-27f3-46b5-a58f-c77e29833d10/cloud/posurvey';
 
@@ -8,15 +10,15 @@ const URI = 'https://faas-tor1-70ca848e.doserverless.co/api/v1/web/fn-e3f092c8-2
   providedIn: 'root'
 })
 export class SurveyService {
-  
+
   state: SurveySubmission = {
     risk: null,
     short: null,
     long: null,
   };
-  
+
   constructor(private http: HttpClient) { }
-  
+
   completeSurvey(): SurveyState {
     return 'SUBMIT';
   }
@@ -48,15 +50,13 @@ export class SurveyService {
     return 'COMPLETE';
   }
 
-  complete(): void {
-    this.http.post(URI, this.state, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).subscribe({
-      next: (res) => console.log("successfully submitted survey", res),
-      error: (err) => console.error(err)
-    });
+  complete(): Observable<string> {
+    return of('69d1a5a0-870c-4026-bf9c-f85a83f04be8');
+    // return this.http.post(URI, this.state, {
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // });
   }
 }
 
