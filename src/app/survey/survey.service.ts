@@ -4,7 +4,7 @@ import { LongSurveySubmission, RiskSurveySubmission, ShortSurveySubmission, Surv
 import { Observable, of } from 'rxjs';
 import { Portfolio } from '../portfolio/model/portfolio.model';
 
-const URI = 'https://faas-tor1-70ca848e.doserverless.co/api/v1/web/fn-e3f092c8-27f3-46b5-a58f-c77e29833d10/cloud/posurvey';
+const URI = './api/v1/survey';
 
 @Injectable({
   providedIn: 'root'
