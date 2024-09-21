@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LongSurveySubmission, RiskSurveySubmission, ShortSurveySubmission, SurveyState, SurveySubmission } from './model/model';
-import { Observable, of } from 'rxjs';
-import { Portfolio } from '../portfolio/model/portfolio.model';
+import { map, Observable } from 'rxjs';
 
-const URI = './api/v1/survey';
+const URI = 'http://localhost:81/api/v1/portfolio'
 
 @Injectable({
   providedIn: 'root'
@@ -51,12 +50,12 @@ export class SurveyService {
   }
 
   complete(): Observable<string> {
-    return of('69d1a5a0-870c-4026-bf9c-f85a83f04be8');
-    // return this.http.post(URI, this.state, {
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // });
+    return this.http.post<any>(URI, this.state, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .pipe(map(response => response['portfolio_id']));
   }
 }
 

@@ -1,11 +1,8 @@
-import { CommonModule } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 
 @Component({
-    standalone: true,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     selector: 'app-error-container',
-    imports: [CommonModule],
     template: `
     <main>
         <pre>{{toString(err)}}</pre>
@@ -15,7 +12,7 @@ import { Router } from "@angular/router";
 export class ErrorContainerComponent implements OnInit {
     err: any;
     
-    constructor(private router: Router) { }
+    constructor() { }
     
     ngOnInit(): void {
         this.err = history.state;

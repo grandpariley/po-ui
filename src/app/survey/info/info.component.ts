@@ -1,11 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { ShortSurveySubmission } from '../model/model';
-import { ShortSurveyComponent } from '../short-survey/short-survey.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, ShortSurveyComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-info',
   templateUrl: './info.component.html',
 })

@@ -1,12 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LongSurveySubmission } from '../model/model';
-import { RankComponent } from '../rank/rank.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RankComponent, FormsModule, ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-long-survey',
   templateUrl: './long-survey.component.html',
 })

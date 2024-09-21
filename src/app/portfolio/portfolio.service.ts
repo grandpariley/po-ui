@@ -1,9 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, Observable, of } from "rxjs";
+import { map, Observable } from "rxjs";
 import { Portfolio } from "./model/portfolio.model";
 
-const URI = './api/v1/portfolio'
+const URI = 'http://localhost:81/api/v1/portfolio'
 
 @Injectable({
     providedIn: 'root'

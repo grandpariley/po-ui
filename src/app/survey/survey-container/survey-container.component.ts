@@ -1,25 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LongSurveySubmission, RiskSurveySubmission, ShortSurveySubmission, SurveyState } from '../model/model';
 import { SurveyService } from '../survey.service';
-import { ConsentComponent } from '../consent/consent.component';
-import { RiskSurveyComponent } from '../risk-survey/risk-survey.component';
-import { ShortSurveyComponent } from '../short-survey/short-survey.component';
-import { InfoComponent } from '../info/info.component';
-import { LongSurveyComponent } from '../long-survey/long-survey.component';
-import { CompleteComponent } from '../complete/complete.component';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
-  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-survey-container',
-  imports: [CommonModule, ConsentComponent, RiskSurveyComponent, ShortSurveyComponent, InfoComponent, LongSurveyComponent, CompleteComponent],
   template: `
-  <div>
-    <h1>THIS IS A PLAYGROUND</h1>
-    <button (click)="test()">CLICK ME</button>
-  </div>
   <div class="grid grid-cols-8 px-6 py-4">
     <div class="col-span-1">
       <img width="100%" height="100%" src="/uofrlogo.jpeg" alt="University of Regina Logo" />
@@ -34,68 +22,60 @@ import { CommonModule } from '@angular/common';
       </div>
     </div>
     <main class="grid grid-cols-1 col-span-8">
-      <app-consent *ngIf="state.value === 'CONSENT'" (submit)="onConsentSubmit()"></app-consent>
-      <app-risk-survey *ngIf="state.value === 'RISK'" (submit)="onRiskSurveySubmit($event)"></app-risk-survey>
-      <app-short-survey *ngIf="state.value === 'SHORT'" (submit)="onShortSurveySubmit($event)" [disabledInputs]="[]"></app-short-survey>
-      <app-info *ngIf="state.value === 'INFO'" (back)="onInfoBack($event)"></app-info>
-      <app-long-survey *ngIf="state.value === 'LONG'" (submit)="onLongSurveySubmit($event)"></app-long-survey>
-      <app-complete *ngIf="state.value === 'COMPLETE'" (submit)="onCompleteSubmit()"></app-complete>
+      <app-consent *ngIf="state === 'CONSENT'" (submit)="onConsentSubmit()"></app-consent>
+      <app-risk-survey *ngIf="state === 'RISK'" (submit)="onRiskSurveySubmit($event)"></app-risk-survey>
+      <app-short-survey *ngIf="state === 'SHORT'" (submit)="onShortSurveySubmit($event)" [disabledInputs]="[]"></app-short-survey>
+      <app-info *ngIf="state === 'INFO'" (back)="onInfoBack($event)"></app-info>
+      <app-long-survey *ngIf="state === 'LONG'" (submit)="onLongSurveySubmit($event)"></app-long-survey>
+      <app-complete *ngIf="state === 'COMPLETE'" (submit)="onCompleteSubmit()"></app-complete>
     </main>
   </div>`,
 })
 export class SurveyContainerComponent implements OnInit {
-  state: FormControl<SurveyState> = new FormControl<SurveyState>('CONSENT', Validators.required);
+  state!: SurveyState;
 
-  constructor(private surveyService: SurveyService, private router: Router) { }
+  constructor(
+    private surveyService: SurveyService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
-    this.state.valueChanges.subscribe(s => {
-      if (s === 'SUBMIT') {
-        this.surveyService.complete()
-          .subscribe({
-            next: (portfolioId) => this.router.navigate(['portfolio', portfolioId]),
-            error: (err) => this.router.navigate(['error'], { state: err }),
-          });
-      }
-    });
+    console.log('do we reinvent this every time')
+    this.state = 'CONSENT';
   }
 
-  test(): void {
+  onInfoBack($event: ShortSurveySubmission) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.state = this.surveyService.completeShortSurvey($event);
+  }
+
+  onRiskSurveySubmit($event: RiskSurveySubmission): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.state = this.surveyService.completeRiskSurvey($event);
+  }
+
+  onShortSurveySubmit($event: ShortSurveySubmission): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.state = this.surveyService.completeShortSurvey($event);
+  }
+
+  onLongSurveySubmit($event: LongSurveySubmission): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.state = this.surveyService.completeLongSurvey($event);
+  }
+
+  onConsentSubmit(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.state = this.surveyService.consentToSurvey();
+  }
+
+  onCompleteSubmit(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.state = this.surveyService.completeSurvey();
     this.surveyService.complete()
       .subscribe({
         next: (portfolioId) => this.router.navigate(['portfolio', portfolioId]),
         error: (err) => this.router.navigate(['error'], { state: err }),
       });
   }
-
-  onInfoBack($event: ShortSurveySubmission) {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    this.state.setValue(this.surveyService.completeShortSurvey($event));
-  }
-
-  onRiskSurveySubmit($event: RiskSurveySubmission): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    this.state.setValue(this.surveyService.completeRiskSurvey($event));
-  }
-
-  onShortSurveySubmit($event: ShortSurveySubmission): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    this.state.setValue(this.surveyService.completeShortSurvey($event));
-  }
-
-  onLongSurveySubmit($event: LongSurveySubmission): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    this.state.setValue(this.surveyService.completeLongSurvey($event));
-  }
-
-  onCompleteSubmit(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    this.state.setValue(this.surveyService.completeSurvey());
-  }
-
-  onConsentSubmit(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    this.state.setValue(this.surveyService.consentToSurvey());
-  }
-
 }
