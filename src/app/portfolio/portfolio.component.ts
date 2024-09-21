@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, DestroyRef } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef } from "@angular/core";
 import { Portfolio } from "./model/portfolio.model";
 import { ActivatedRoute } from "@angular/router";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { filter, mergeMap, takeUntil, tap, timer } from "rxjs";
+import { first, mergeMap, timer } from "rxjs";
 import { PortfolioService } from "./portfolio.service";
 
 @Component({
@@ -19,28 +19,32 @@ import { PortfolioService } from "./portfolio.service";
 })
 export class PortfolioContainerComponent {
     portfolio!: Portfolio;
-    portfolioId!: string;
+    portfolioId: string | null = null;
     loading = false;
     constructor(
         private activatedRoute: ActivatedRoute,
         private destroyRef: DestroyRef,
+        private cdr: ChangeDetectorRef,
         private portfolioService: PortfolioService
     ) { }
 
     ngOnInit(): void {
         this.loading = true;
-        this.activatedRoute.params
+        this.portfolioId = this.activatedRoute.snapshot.paramMap.get('portfolioId');
+        if (!this.portfolioId) {
+            return;
+        }
+        timer(0, 500)
             .pipe(
-                tap(params => this.portfolioId = params['portfolioId']),
-                mergeMap(() => timer(0, 500)),
-                tap(() => console.log('bump')),
-                takeUntil(this.portfolioService.poll(this.portfolioId).pipe(filter(Boolean))),
-                mergeMap(() => this.portfolioService.get(this.portfolioId)),
+                mergeMap(() => this.portfolioService.poll(this.portfolioId as string)),
+                first(Boolean),
+                mergeMap(() => this.portfolioService.get(this.portfolioId as string)),
                 takeUntilDestroyed(this.destroyRef),
             )
-            .subscribe(portfolio => { 
-                this.portfolio = portfolio; 
-                this.loading = false; 
+            .subscribe(portfolio => {
+                this.portfolio = portfolio;
+                this.loading = false;
+                this.cdr.markForCheck();
             })
     }
 
