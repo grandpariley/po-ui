@@ -15,11 +15,13 @@ import { PortfolioService } from './portfolio/portfolio.service';
 import { AppRoutingModule } from './app-routing.module';
 import { RankComponent } from './survey/rank/rank.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { PortfolioContainerComponent } from './portfolio/portfolio.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         SurveyContainerComponent,
+        PortfolioContainerComponent,
         ConsentComponent,
         RiskSurveyComponent,
         ShortSurveyComponent,

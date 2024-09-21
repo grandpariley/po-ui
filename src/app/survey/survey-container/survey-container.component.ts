@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LongSurveySubmission, RiskSurveySubmission, ShortSurveySubmission, SurveyState } from '../model/model';
 import { SurveyService } from '../survey.service';
@@ -10,7 +10,7 @@ import { SurveyService } from '../survey.service';
   template: `
   <div class="grid grid-cols-8 px-6 py-4">
     <div class="col-span-1">
-      <img width="100%" height="100%" src="/uofrlogo.jpeg" alt="University of Regina Logo" />
+      <img width="100%" height="100%" src="/uofrlogo.jpeg" alt="University of Regina Logo" (click)="onReset()" />
     </div>
     <div class="col-span-7 flex items-center">
       <div>
@@ -39,7 +39,11 @@ export class SurveyContainerComponent {
     private router: Router,
   ) { }
 
-  onInfoBack($event: ShortSurveySubmission) {
+  onReset(): void {
+    this.state = 'CONSENT';
+  }
+
+  onInfoBack($event: ShortSurveySubmission): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.state = this.surveyService.completeShortSurvey($event);
   }
