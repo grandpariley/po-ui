@@ -38,10 +38,8 @@ export class SurveyService {
         return 'LONG';
       case 'B':
         return 'INFO';
-      case 'C':
-        return 'COMPLETE';
     }
-    return null;
+    return 'COMPLETE';
   }
 
   completeLongSurvey(longSurveySubmission: LongSurveySubmission): SurveyState {

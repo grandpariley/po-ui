@@ -31,18 +31,13 @@ import { SurveyService } from '../survey.service';
     </main>
   </div>`,
 })
-export class SurveyContainerComponent implements OnInit {
+export class SurveyContainerComponent {
   state!: SurveyState;
 
   constructor(
     private surveyService: SurveyService,
     private router: Router,
   ) { }
-
-  ngOnInit(): void {
-    console.log('do we reinvent this every time')
-    this.state = 'CONSENT';
-  }
 
   onInfoBack($event: ShortSurveySubmission) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
