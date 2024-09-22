@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RankComponent } from './survey/rank/rank.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { PortfolioContainerComponent } from './portfolio/portfolio.component';
+import { ErrorContainerComponent } from './error/error.component';
 
 @NgModule({
     declarations: [
@@ -29,6 +30,7 @@ import { PortfolioContainerComponent } from './portfolio/portfolio.component';
         LongSurveyComponent,
         CompleteComponent,
         RankComponent,
+        ErrorContainerComponent,
     ],
     imports: [
         AppRoutingModule,
