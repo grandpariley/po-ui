@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
@@ -41,6 +41,7 @@ import { PortfolioContainerComponent } from './portfolio/portfolio.component';
         SurveyService,
         PortfolioService,
         provideHttpClient(withInterceptorsFromDi()),
+        provideClientHydration(),
     ],
     bootstrap: [AppComponent]
 })
