@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LongSurveySubmission, RiskSurveySubmission, ShortSurveySubmission, SurveyState } from '../model/model';
 import { SurveyService } from '../survey.service';
@@ -31,7 +31,7 @@ import { SurveyService } from '../survey.service';
     </main>
   </div>`,
 })
-export class SurveyContainerComponent {
+export class SurveyContainerComponent implements OnInit {
   state!: SurveyState;
 
   constructor(
@@ -39,42 +39,50 @@ export class SurveyContainerComponent {
     private router: Router,
   ) { }
 
+  ngOnInit(): void {
+    this.onReset();
+  }
+
   onReset(): void {
     this.state = 'CONSENT';
   }
 
   onInfoBack($event: ShortSurveySubmission): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.scrollToTop();
     this.state = this.surveyService.completeShortSurvey($event);
   }
 
   onRiskSurveySubmit($event: RiskSurveySubmission): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.scrollToTop();
     this.state = this.surveyService.completeRiskSurvey($event);
   }
 
   onShortSurveySubmit($event: ShortSurveySubmission): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.scrollToTop();
     this.state = this.surveyService.completeShortSurvey($event);
   }
 
   onLongSurveySubmit($event: LongSurveySubmission): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.scrollToTop();
     this.state = this.surveyService.completeLongSurvey($event);
   }
 
   onConsentSubmit(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.scrollToTop();
     this.state = this.surveyService.consentToSurvey();
   }
 
   onCompleteSubmit(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.scrollToTop();
     this.state = this.surveyService.completeSurvey();
     this.surveyService.complete()
       .subscribe({
         next: (portfolioId) => this.router.navigate(['portfolio', portfolioId]),
         error: (err) => this.router.navigate(['error'], { state: err }),
       });
+  }
+
+  private scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
