@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LongSurveySubmission, RiskSurveySubmission, ShortSurveySubmission, SurveyState, SurveySubmission } from './model/model';
 import { map, Observable } from 'rxjs';
+import { environment } from '../../environment/environment';
 
-const URI = 'http://localhost:81/api/v1/portfolio'
+const URI = `${environment.SERVICE_URI}/survey`
 
 @Injectable({
   providedIn: 'root'
