@@ -10,7 +10,7 @@ import { SurveyService } from '../survey.service';
   template: `
   <div class="grid grid-cols-8 px-6 py-4">
     <div class="col-span-1">
-      <img width="100%" height="100%" src="browser/uofrlogo.jpeg" alt="University of Regina Logo" (click)="onReset()" />
+      <img width="100%" height="100%" src="uofrlogo.jpeg" alt="University of Regina Logo" (click)="onReset()" />
     </div>
     <div class="col-span-7 flex items-center">
       <div>
@@ -18,7 +18,7 @@ import { SurveyService } from '../survey.service';
         <div class="text-xs text-gray-600 mb-4">
           <p>Please note that you can close your browser at any time to withdraw consent. No information will be collected until the final submission.</p>
           <p>Please note that by submitting the survey you will be providing implied consent. Please review the <a class="underline text-blue-600" 
-          href="browser/ESG-Conscious-Portfolio-Survey-Consent-Form.pdf" target="_blank">consent form</a> prior to submission.</p>
+          href="ESG-Conscious-Portfolio-Survey-Consent-Form.pdf" target="_blank">consent form</a> prior to submission.</p>
         </div>
       </div>
     </div>
