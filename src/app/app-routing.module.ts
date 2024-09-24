@@ -14,7 +14,7 @@ const routes: Routes = [
         component: ErrorContainerComponent,
     },
     {
-        path: 'portfolio/:portfolioId',
+        path: 'portfolio',
         component: PortfolioContainerComponent,
     },
     {

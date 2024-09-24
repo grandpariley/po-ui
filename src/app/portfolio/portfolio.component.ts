@@ -30,7 +30,7 @@ export class PortfolioContainerComponent {
 
     ngOnInit(): void {
         this.loading = true;
-        this.portfolioId = this.activatedRoute.snapshot.paramMap.get('portfolioId');
+        this.portfolioId = this.activatedRoute.snapshot.queryParamMap.get('portfolioId');
         if (!this.portfolioId) {
             return;
         }
