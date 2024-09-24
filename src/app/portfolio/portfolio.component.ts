@@ -34,7 +34,7 @@ export class PortfolioContainerComponent {
         if (!this.portfolioId) {
             return;
         }
-        timer(0, 500)
+        timer(0, 5000)
             .pipe(
                 mergeMap(() => this.portfolioService.poll(this.portfolioId as string)),
                 first(Boolean),
