@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef } fro
 import { PortfolioContainer } from "./model/portfolio.model";
 import { ActivatedRoute } from "@angular/router";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { first, mergeMap, timer } from "rxjs";
+import { catchError, first, mergeMap, of, timer } from "rxjs";
 import { PortfolioService } from "./portfolio.service";
 
 @Component({
@@ -50,6 +50,7 @@ export class PortfolioContainerComponent {
         timer(0, 5000)
             .pipe(
                 mergeMap(() => this.portfolioService.poll(this.portfolioId as string)),
+                catchError(() => of(false)),
                 first(Boolean),
                 mergeMap(() => this.portfolioService.get(this.portfolioId as string)),
                 takeUntilDestroyed(this.destroyRef),
