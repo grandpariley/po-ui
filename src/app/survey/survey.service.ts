@@ -49,6 +49,7 @@ export class SurveyService {
   }
 
   complete(): Observable<string> {
+    console.log(this.state);
     return this.http.post<any>(URI, this.state, {
       headers: {
         'Content-Type': 'application/json'

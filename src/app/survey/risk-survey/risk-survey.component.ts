@@ -9,7 +9,7 @@ import { MultipleChoice, RiskSurveySubmission } from '../model/model';
 })
 export class RiskSurveyComponent {
 
-  @Output() submit: EventEmitter<RiskSurveySubmission> = new EventEmitter<RiskSurveySubmission>();
+  @Output() riskSurveySubmit: EventEmitter<RiskSurveySubmission> = new EventEmitter<RiskSurveySubmission>();
 
   formGroup = new FormGroup({
     r1: new FormControl<MultipleChoice | undefined | null>(null),
@@ -25,7 +25,7 @@ export class RiskSurveyComponent {
   });
 
   onSubmit(): void {
-    this.submit.emit({
+    this.riskSurveySubmit.emit({
       r1: this.formGroup.get('r1')?.value,
       r2: this.formGroup.get('r2')?.value,
       r3: this.formGroup.get('r3')?.value,

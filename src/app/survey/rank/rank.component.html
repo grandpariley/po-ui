@@ -5,10 +5,10 @@
             <div class="flex flex-col justify-center mr-2">
                 <button type="button" [id]="'up-ranked-' + i" class="disabled:opacity-50"
                     [disabled]="upDisabled(option)" (click)="up(option)">
-                    <i class="fa fa-chevron-up"></i>
+                    <span class="material-symbols-outlined">keyboard_arrow_up</span>
                 </button>
                 <button type="button" [id]="'down-ranked-' + i" class="disabled:opacity-50" (click)="down(option)">
-                    <i class="fa fa-chevron-down"></i>
+                    <span class="material-symbols-outlined">keyboard_arrow_down</span>
                 </button>
             </div>
             <input hidden class="w-24 border-2 border-slate-700 rounded p-1 mr-2 my-1" type="number"
@@ -22,11 +22,11 @@
             <div class="flex flex-col justify-center mr-2">
                 <button type="button" [id]="'up-unranked-' + i" class="disabled:opacity-50"
                     [disabled]="upDisabled(option)" (click)="rank(option)">
-                    <i class="fa fa-chevron-up"></i>
+                    <span class="material-symbols-outlined">keyboard_arrow_up</span>
                 </button>
                 <button type="button" [id]="'down-unranked-' + i" class="disabled:opacity-50"
                     [disabled]="true">
-                    <i class="fa fa-chevron-down"></i>
+                    <span class="material-symbols-outlined">keyboard_arrow_down</span>
                 </button>
             </div>
             <input hidden class="w-24 border-2 border-slate-700 rounded p-1 mr-2 my-1" type="number"

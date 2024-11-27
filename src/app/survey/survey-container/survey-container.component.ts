@@ -23,12 +23,12 @@ import { SurveyService } from '../survey.service';
       </div>
     </div>
     <main class="grid grid-cols-1 col-span-8">
-      <app-consent *ngIf="state === 'CONSENT'" (submit)="onConsentSubmit()"></app-consent>
-      <app-risk-survey *ngIf="state === 'RISK'" (submit)="onRiskSurveySubmit($event)"></app-risk-survey>
-      <app-short-survey *ngIf="state === 'SHORT'" (submit)="onShortSurveySubmit($event)" [disabledInputs]="[]"></app-short-survey>
+      <app-consent *ngIf="state === 'CONSENT'" (consentSubmit)="onConsentSubmit()"></app-consent>
+      <app-risk-survey *ngIf="state === 'RISK'" (riskSurveySubmit)="onRiskSurveySubmit($event)"></app-risk-survey>
+      <app-short-survey *ngIf="state === 'SHORT'" (shortSurveySubmit)="onShortSurveySubmit($event)" [disabledInputs]="[]"></app-short-survey>
       <app-info *ngIf="state === 'INFO'" (back)="onInfoBack($event)"></app-info>
-      <app-long-survey *ngIf="state === 'LONG'" (submit)="onLongSurveySubmit($event)"></app-long-survey>
-      <app-complete *ngIf="state === 'COMPLETE'" (submit)="onCompleteSubmit()"></app-complete>
+      <app-long-survey *ngIf="state === 'LONG'" (longSurveySubmit)="onLongSurveySubmit($event)"></app-long-survey>
+      <app-complete *ngIf="state === 'COMPLETE'" (completeSubmit)="onCompleteSubmit()"></app-complete>
     </main>
   </div>`,
 })

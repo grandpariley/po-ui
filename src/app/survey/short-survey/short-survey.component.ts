@@ -9,7 +9,7 @@ import { MultipleChoice, ShortSurveySubmission } from '../model/model';
 })
 export class ShortSurveyComponent {
   
-  @Output() submit: EventEmitter<ShortSurveySubmission> = new EventEmitter<ShortSurveySubmission>();
+  @Output() shortSurveySubmit: EventEmitter<ShortSurveySubmission> = new EventEmitter<ShortSurveySubmission>();
   formGroup = new FormGroup({
     q1: new FormControl<MultipleChoice | undefined | null>(null, Validators.required),
   });
@@ -17,7 +17,7 @@ export class ShortSurveyComponent {
   @Input() disabledInputs: string[] = []
 
   onSubmit(): void {
-    this.submit.emit({
+    this.shortSurveySubmit.emit({
       q1: this.formGroup.get('q1')?.value
     });
   }

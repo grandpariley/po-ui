@@ -7,9 +7,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angul
   templateUrl: './complete.component.html',
 })
 export class CompleteComponent {
-  @Output() submit: EventEmitter<void> = new EventEmitter<void>();
+  @Output() completeSubmit: EventEmitter<void> = new EventEmitter<void>();
 
   onSubmit(): void {
-    this.submit.emit();
+    this.completeSubmit.emit();
   }
 }

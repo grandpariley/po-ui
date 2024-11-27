@@ -6,9 +6,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angul
   templateUrl: './consent.component.html',
 })
 export class ConsentComponent {
-  @Output() submit: EventEmitter<void> = new EventEmitter<void>();
+  @Output() consentSubmit: EventEmitter<void> = new EventEmitter<void>();
 
   onSubmit(): void {
-    this.submit.emit();
+    this.consentSubmit.emit();
   }
 }

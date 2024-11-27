@@ -9,7 +9,7 @@ import { LongSurveySubmission } from '../model/model';
 })
 export class LongSurveyComponent {
 
-  @Output() submit: EventEmitter<LongSurveySubmission> = new EventEmitter<LongSurveySubmission>();
+  @Output() longSurveySubmit: EventEmitter<LongSurveySubmission> = new EventEmitter<LongSurveySubmission>();
   
   q3Options = [
     'Want to have a clear positive impact on the society and/or the environment with the investment',
@@ -103,7 +103,7 @@ export class LongSurveyComponent {
   });
 
   onSubmit(): void {
-    this.submit.emit({
+    this.longSurveySubmit.emit({
       q2: this.formGroup.get('q2')?.value,
       q3: this.formGroup.get('q3')?.value,
       q4a: this.formGroup.get('q4a')?.value,
