@@ -1,4 +1,4 @@
 export const environment = {
-    SERVICE_URI: 'https://po-service-d45yy.ondigitalocean.app/api/v1'
+    SERVICE_URI: 'http://api.rileyherman.ca:2736/api/v1'
   };
   
