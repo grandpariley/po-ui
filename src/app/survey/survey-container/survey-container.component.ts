@@ -74,16 +74,14 @@ export class SurveyContainerComponent implements OnInit {
   }
 
   onCompleteSubmit(): void {
-    this.scrollToTop();
     this.state = this.surveyService.completeSurvey();
     this.surveyService.complete()
       .subscribe({
-        next: (portfolioId) => this.router.navigate(['portfolio'], {
-          queryParams: {
-            portfolioId
-          }
-        }),
-        error: (err) => this.router.navigate(['error'], { state: err }),
+        next: (portfolioId) => this.router.navigate(['portfolio'], { queryParams: { portfolioId } }),
+        error: (err) => {
+          console.error(err)
+          this.router.navigate(['error'], { queryParams: { error: err.error } })
+        },
       });
   }
 

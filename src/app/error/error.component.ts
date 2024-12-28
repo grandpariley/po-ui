@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,10 +13,10 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 export class ErrorContainerComponent implements OnInit {
     err: any;
     
-    constructor() { }
+    constructor(private activatedRoute: ActivatedRoute) { }
     
     ngOnInit(): void {
-        this.err = history.state;
+        this.err = this.activatedRoute.snapshot.queryParamMap.get('error');
     }
 
     toString(object: any): string {
