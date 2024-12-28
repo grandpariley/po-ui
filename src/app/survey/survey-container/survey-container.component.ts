@@ -80,7 +80,7 @@ export class SurveyContainerComponent implements OnInit {
         next: (portfolioId) => this.router.navigate(['portfolio'], { queryParams: { portfolioId } }),
         error: (err) => {
           console.error(err)
-          this.router.navigate(['error'], { queryParams: { error: err.error } })
+          this.router.navigate(['error'], { queryParams: { error: err.message } })
         },
       });
   }
